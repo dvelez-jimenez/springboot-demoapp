@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: springboot-demoapp
+  name: springboot-demoapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: springboot-demoapp
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: springboot-demoapp
+    spec:
+      containers:
+      - image: dvelez/sprinboot-demoapp
+        name: springboot-demoapp
+        resources: {}
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: springboot-demoapp
+  name: springboot-demoapp
+spec:
+  ports:
+  - name: 8080-8080
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: springboot-demoapp
+  type: ClusterIP
+status:
+  loadBalancer: {}
